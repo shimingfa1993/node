@@ -1,0 +1,15 @@
+nohup: ignoring input
+Tue Sep  9 22:59:28 CST 2025: 服务异常，正在重启...
+Use --update-env to update environment variables
+[PM2] Applying action restartProcessId on app [lengthwords-api](ids: [ 0 ])
+[PM2][ERROR] Process 0 not found
+Tue Sep  9 22:59:29 CST 2025: API无响应，正在重启...
+Use --update-env to update environment variables
+[PM2] Applying action restartProcessId on app [lengthwords-api](ids: [ 0 ])
+[PM2][ERROR] Process 0 not found
+Tue Sep  9 23:04:29 CST 2025: 服务异常，正在重启...
+Use --update-env to update environment variables
+[PM2][ERROR] Process or Namespace lengthwords-api not found
+Tue Sep  9 23:04:30 CST 2025: API无响应，正在重启...
+Use --update-env to update environment variables
+[PM2][ERROR] Process or Namespace lengthwords-api not found
