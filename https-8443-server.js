@@ -227,6 +227,14 @@ function authenticateToken(req, res, next) {
 // 学习统计接口
 app.get('/api/learning/stats', authenticateToken, (req, res) => {
   console.log('获取学习统计, 用户ID:', req.userId);
+  
+  // 设置缓存控制头，禁用缓存确保每次都返回最新数据
+  res.set({
+    'Cache-Control': 'no-cache, no-store, must-revalidate',
+    'Pragma': 'no-cache',
+    'Expires': '0'
+  });
+  
   res.json({
     success: true,
     totalWords: 0,
@@ -234,7 +242,8 @@ app.get('/api/learning/stats', authenticateToken, (req, res) => {
     todayTarget: 10,
     todayProgress: 0,
     learningStreak: 0,
-    reviewCount: 0
+    reviewCount: 0,
+    timestamp: new Date().toISOString() // 添加时间戳确保内容变化
   });
 });
 
@@ -302,7 +311,10 @@ function startServer() {
       // HTTP重定向到HTTPS
       const httpApp = express();
       httpApp.use('*', (req, res) => {
-        const httpsUrl = 'https://' + req.headers.host.replace(':8080', ':8443') + req.url;
+        // 安全处理host头，避免undefined错误
+        const host = req.headers.host || 'lengthwords.top:8080';
+        const httpsUrl = 'https://' + host.replace(':8080', ':8443') + req.url;
+        console.log('HTTP重定向:', req.url, '->', httpsUrl);
         res.redirect(301, httpsUrl);
       });
       
